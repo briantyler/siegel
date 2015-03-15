@@ -1,0 +1,29 @@
+AC_INIT([siegel],[1.0],[brian.tyler@gmail.com])
+AC_PREREQ([2.59])
+AC_CONFIG_AUX_DIR(config)
+
+DX_HTML_FEATURE(OFF)
+DX_CHM_FEATURE(OFF)
+DX_CHI_FEATURE(OFF)
+DX_MAN_FEATURE(OFF)
+DX_RTF_FEATURE(OFF)
+DX_XML_FEATURE(OFF)
+DX_PDF_FEATURE(OFF)
+DX_PS_FEATURE(OFF)
+DX_INIT_DOXYGEN(siegel, doxygen.cfg)
+
+AM_INIT_AUTOMAKE
+AC_PROG_CC
+AC_PROG_CXX
+
+CXXFLAGS="-O3 -mfpmath=387,sse -ffast-math -pipe"
+AX_GCC_ARCHFLAG([no],[CXXFLAGS="$CXXFLAGS $ax_cv_gcc_archflag"])
+
+AX_BOOST_BASE([1.34.1])
+AX_USE_GMPXX
+
+AC_CONFIG_SRCDIR([src/main.cpp])
+AC_CONFIG_HEADER([config.h])
+
+AC_PROG_INSTALL
+AC_OUTPUT(Makefile src/Makefile)
